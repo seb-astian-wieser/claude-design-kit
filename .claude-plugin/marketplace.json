@@ -1,0 +1,15 @@
+{
+  "name": "seb-design-kit",
+  "owner": { "name": "Sebastian Wieser" },
+  "metadata": {
+    "description": "Sebastian Wieser's Claude Code skills for design work: project hygiene that keeps token use down, prototypes with a patched DialKit panel, plan grilling.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "design-kit",
+      "source": "./plugins/design-kit",
+      "description": "project-start, handoff, project-status, prototype, dialkit (with the patched panel), grill and react-run."
+    }
+  ]
+}

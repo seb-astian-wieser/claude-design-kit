@@ -1,0 +1,12 @@
+or {
+  `(() => $body)()`,
+  `(async () => $body)()`,
+  `(function () { $body })()`,
+  `(async function () { $body })()`
+} as $iife where {
+  register_diagnostic(
+    span = $iife,
+    message = "Use run(() => { … }) instead of an IIFE: same scoping and early returns, easier to read.",
+    severity = "error"
+  )
+}

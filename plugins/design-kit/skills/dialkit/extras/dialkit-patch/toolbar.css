@@ -1,0 +1,334 @@
+
+/* Blick patch (dialkit-patch/plugin.js): the shared toolbar. */
+.dialkit-panel-toolbar:has(.dialkit-root-toolbar) {
+  overflow: visible;
+}
+.dialkit-root-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  width: 100%;
+}
+.dialkit-root-toolbar .dialkit-toolbar-add {
+  color: var(--dial-text-primary);
+}
+.dialkit-root-toolbar .dialkit-toolbar-add svg {
+  color: inherit;
+}
+.dialkit-root-toolbar .dialkit-toolbar-add:disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.dialkit-root-toolbar .dialkit-toolbar-add[aria-pressed="true"] {
+  background: var(--dial-surface-active);
+}
+.dialkit-root-toolbar-divider {
+  width: 1px;
+  height: 20px;
+  margin: 0 2px;
+  background: var(--dial-border);
+  flex-shrink: 0;
+}
+.dialkit-root-menu {
+  position: relative;
+}
+.dialkit-root-menu-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  padding: 4px;
+  background: var(--dial-dropdown-bg);
+  border: 1px solid var(--dial-border);
+  border-radius: 10px;
+  box-shadow: var(--dial-shadow-dropdown);
+}
+.dialkit-root-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 32px;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--dial-text-secondary);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dialkit-root-menu-item:hover {
+  background: var(--dial-surface-hover);
+  color: var(--dial-text-primary);
+}
+/* Sections can be dragged up and down to reorder them (toolbar.js → DkOrder). */
+.dialkit-root-menu-item { touch-action: none; user-select: none; }
+.dialkit-root-menu-item[data-dragging="true"] {
+  cursor: grabbing;
+  color: var(--dial-text-primary, #fff);
+  background: var(--dial-surface-hover, rgba(255, 255, 255, 0.08));
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+.dialkit-root-menu-item[data-active="true"] {
+  color: var(--dial-text-primary);
+}
+.dialkit-root-menu-item svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Sections have no toolbar of their own now. */
+.dialkit-folder-section {
+  --dial-section-header-height: calc(var(--dial-row-height) + 8px);
+}
+
+/* Action buttons (Replay loader, Reload page): white text, like the toolbar. */
+.dialkit-button {
+  color: var(--dial-text-primary);
+}
+
+/* Version history (toolbar clock button). */
+.dk-slot:empty {
+  display: none;
+}
+.dialkit-folder-root[data-dk-history="view"] > .dialkit-folder-content > .dialkit-folder-inner > :not(.dk-slot) {
+  opacity: 0.55;
+  pointer-events: none;
+}
+.dk-hist {
+  display: flex;
+  flex-direction: column;
+}
+.dk-hist-drop {
+  right: 0;
+  left: auto;
+  min-width: 0;
+  max-height: 420px;
+  padding: 0 10px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.dk-hist-drop::-webkit-scrollbar {
+  display: none;
+}
+.dk-hist-day + .dk-hist-day {
+  border-top: 1px solid var(--dial-border);
+}
+.dk-hist-ver[data-viewing] {
+  background: var(--dial-surface-active);
+}
+.dk-hist-day-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 0;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dial-text-section);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.dk-hist-count {
+  margin-left: 6px;
+  font-weight: 500;
+  color: var(--dial-text-tertiary);
+}
+.dk-hist-chev {
+  width: 14px;
+  height: 14px;
+  color: var(--dial-text-tertiary);
+  transition: transform 0.2s;
+}
+.dk-hist-chev[data-open="true"] {
+  transform: rotate(180deg);
+}
+.dk-hist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 10px;
+}
+.dk-hist-ver {
+  display: block;
+  width: 100%;
+  padding: 9px 10px 10px;
+  font-family: inherit;
+  text-align: left;
+  color: var(--dial-text-primary);
+  background: var(--dial-surface);
+  border: none;
+  border-radius: var(--dial-radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.dk-hist-ver:hover:not(:disabled) {
+  background: var(--dial-surface-hover);
+}
+.dk-hist-ver:disabled,
+.dk-hist-ver[data-static] {
+  cursor: default;
+}
+.dk-hist-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.dk-hist-tags {
+  display: flex;
+  gap: 4px;
+}
+.dk-hist-time {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dial-text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.dk-hist-tag {
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dial-text-secondary);
+  background: var(--dial-surface-hover);
+  border-radius: 5px;
+}
+.dk-hist-tag[data-current] {
+  color: var(--dial-text-root);
+  background: var(--dial-surface-active);
+}
+.dk-hist-meta {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--dial-text-tertiary);
+}
+.dk-hist-changes {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+.dk-hist-chg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 10px;
+  row-gap: 2px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.dk-hist-k {
+  color: var(--dial-text-secondary);
+}
+.dk-hist-k b {
+  font-weight: 500;
+  color: var(--dial-text-primary);
+}
+.dk-hist-d {
+  margin-left: auto;
+  font-family: 'Geist Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--dial-text-tertiary);
+  white-space: nowrap;
+}
+.dk-hist-d i {
+  font-style: normal;
+  color: var(--dial-text-primary);
+}
+.dk-hist-group {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dial-text-primary);
+}
+.dk-hist-group:first-child {
+  margin-top: 0;
+}
+.dk-hist-empty {
+  padding: 14px 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--dial-text-tertiary);
+}
+.dk-hist-banner {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: var(--dial-surface);
+  border-radius: var(--dial-radius);
+}
+.dk-hist-banner .dk-hist-changes {
+  margin-top: 10px;
+}
+.dk-hist-ro {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dial-text-secondary);
+}
+.dk-hist-ro svg {
+  width: 12px;
+  height: 12px;
+}
+/* Pinned to the panel's bottom edge, so it brings its own 12px inset (and stands in for the
+   panel's 10px bottom padding at the end of the scroll); the ::before covers the side gutters. */
+.dk-slot-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding-bottom: 12px;
+  margin-bottom: -10px;
+  background: var(--dial-glass-bg);
+}
+.dk-slot-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0 -12px;
+  z-index: -1;
+  background: var(--dial-glass-bg);
+  pointer-events: none;
+}
+.dk-hist-foot {
+  display: flex;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--dial-border);
+}
+.dk-hist-act {
+  flex: 1;
+  height: var(--dial-row-height);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--dial-text-primary);
+  background: var(--dial-surface);
+  border: none;
+  border-radius: var(--dial-radius);
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+.dk-hist-act:hover {
+  background: var(--dial-surface-hover);
+}
+.dk-hist-act[data-primary] {
+  color: var(--dial-glass-bg);
+  background: var(--dial-text-root);
+}
+.dk-hist-act[data-primary]:hover {
+  opacity: 0.9;
+  background: var(--dial-text-root);
+}

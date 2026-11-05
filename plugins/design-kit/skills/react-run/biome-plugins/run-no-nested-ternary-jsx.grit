@@ -1,0 +1,12 @@
+`$test ? $yes : $no` as $ternary where {
+  or {
+    $yes <: or { `$_ ? $_ : $_`, `($_ ? $_ : $_)` },
+    $no <: or { `$_ ? $_ : $_`, `($_ ? $_ : $_)` }
+  },
+  $ternary <: or { within JsxExpressionChild(), within JsxExpressionAttributeValue() },
+  register_diagnostic(
+    span = $ternary,
+    message = "Nested ternary in JSX: use run(() => { if (…) return …; return …; }) with one condition per line.",
+    severity = "error"
+  )
+}

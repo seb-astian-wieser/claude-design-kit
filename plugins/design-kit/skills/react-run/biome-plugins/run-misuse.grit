@@ -1,0 +1,20 @@
+or {
+  // Already in a function body: the ifs and early returns can go there directly.
+  or { `return run($fn)`, `return await run($fn)` } as $call where {
+    register_diagnostic(
+      span = $call,
+      message = "No need for run() here: you're already in a function body, so write the ifs and early returns directly.",
+      severity = "warn"
+    )
+  },
+  // Trivial: run(() => value) with no block is just the value.
+  `run($fn)` as $call where {
+    $fn <: or { `() => $body`, `async () => $body` },
+    not $body <: JsFunctionBody(),
+    register_diagnostic(
+      span = $call,
+      message = "Trivial run(): use the expression directly. run() is for blocks with ifs and early returns.",
+      severity = "warn"
+    )
+  }
+}

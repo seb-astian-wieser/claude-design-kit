@@ -1,0 +1,9 @@
+{
+  "name": "design-kit",
+  "version": "0.1.0",
+  "description": "Token-saving project workflow for designers using Claude Code: project folders with a CLAUDE.md, handoffs between sessions, a status round, prototypes with a patched DialKit panel, plan grilling, and the run() utility.",
+  "author": { "name": "Sebastian Wieser" },
+  "repository": "https://github.com/seb-astian-wieser/claude-design-kit",
+  "license": "MIT",
+  "keywords": ["design", "prototype", "dialkit", "workflow", "tokens", "claude-md", "skills"]
+}
