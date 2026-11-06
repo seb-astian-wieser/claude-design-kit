@@ -2,7 +2,7 @@
 
 Claude Code skills for design work that keep token use down. Built from one designer's week of usage data, where about 85% of the cost was Claude re-reading context: connector tool lists, long sessions, screenshots.
 
-The guide that goes with it: [Claude Code without burning tokens](https://claude.ai/artifact/KEqWdXX5fs6t4eDTTrx2rd).
+The guide that goes with it, for you and for your Claude: [GUIDE.md](GUIDE.md) (living copy: [Claude Code without burning tokens](https://claude.ai/artifact/KEqWdXX5fs6t4eDTTrx2rd)). Paste it into a Claude Code session and your Claude does the setup.
 
 ## Install
 
