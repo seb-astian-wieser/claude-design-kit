@@ -58,6 +58,18 @@ If you build prototypes, add this too:
 - version history of every panel's values in `dial-history.json`
 - values auto-save to `dial-values.json` (`dial-values.plugin.js`), written atomically
 - ⌘. hides and shows the panel
+- nested sections: a folder inside a folder, each collapsible on its own
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/panel.png" width="311" alt="The open DialKit panel with the toolbar above the sections"><br><sub>The open panel: one toolbar for copy, undo, redo, version history and sections.</sub></td>
+    <td align="center"><img src="docs/version-history.png" width="311" alt="The version history dropdown, grouped by day"><br><sub>Version history, grouped by day, from <code>dial-history.json</code>.</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/sections-menu.png" width="311" alt="The sections menu listing every panel"><br><sub>The sections menu jumps to any panel.</sub></td>
+    <td align="center"><img src="docs/nested-sections.png" width="311" alt="Loader section with the nested Cross folder holding Centre and Step"><br><sub>Nested sections: Loader &gt; Cross &gt; Centre and Step, each collapsible.</sub></td>
+  </tr>
+</table>
 
 It edits the compiled React bundle with exact string replacements written against dialkit 2.1.0. Each must match once, so a DialKit update makes the dev server fail loudly instead of silently dropping the patch. React + Vite only; in a vanilla page mount the panel as a small React island.
 
