@@ -18,7 +18,7 @@ Why the setup above works, and the habits the skills encode. Nothing here is req
 
 ### Why
 
-Over three heavy days of Claude Code, 84% of the cost was Claude reading context and 16% writing. Those three days used about 60% of a Max plan's weekly allowance; the full week at that pace reached 95% with a day still to go. 56% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
+Over three heavy days of Claude Code, 84% of the cost was Claude reading context and 16% writing. Those three days used about 60% of a Max plan's weekly allowance, and the full week at that pace reached 95% with a day still to go. On Ultra, which has twice the weekly allowance, the same three days would be about 30%. 56% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
 
 | What | One designer, three days, at API rates |
 | --- | --- |
