@@ -10,20 +10,19 @@ DialKit is a floating panel of sliders, colour pickers, toggles, springs and act
 ## Steps
 
 0. **Sync the patch from Blick**: run `extras/sync-from-blick.sh` (next to this file). Blick (`learn-about-art`) is the reference project; the script copies any newer patch or plugin files into `extras/` and prints the DialKit version Blick pins. Install that same version in step 3, since the patch is written against it.
-1. **Read the latest README first**: https://github.com/joshpuckett/dialkit#readme (WebFetch). The API below is from v2.0.2 (Oct 2026). If the README disagrees, the README wins.
+1. **The version is pinned.** The patched panel is written against dialkit 2.1.0 (the version `extras/sync-from-blick.sh` prints). Install exactly that version and do not consult the upstream README to pick a newer one; the API below is from 2.1.0. Only when the user asks to move to a newer DialKit: update the replacements in `extras/dialkit-patch/plugin.js` first, then bump.
 2. **Detect the app.** Which framework (package.json deps, config files), which package manager (lockfile: package-lock → npm, pnpm-lock → pnpm, yarn.lock → yarn, bun.lock(b) → bun). In a monorepo or a folder with several apps, pick the one the user means, or ask if it's unclear.
-3. **Install** with that package manager (latest version):
+3. **Install** with that package manager, pinned: `dialkit@2.1.0` (exact, no caret) plus `motion`. Whatever the app's framework, the panel is always the patched React panel; the rows below say what else to install:
 
    | Framework | Packages | Import from | Styles |
    |---|---|---|---|
    | React 18+ / Next.js | `dialkit motion` | `dialkit` | `import 'dialkit/styles.css'` |
-   | Solid 1.6+ | `dialkit motion` | `dialkit/solid` | `import 'dialkit/styles.css'` |
-   | Svelte 5.8+ | `dialkit` | `dialkit/svelte` | none (DialRoot injects them) |
-   | Vue 3.3+ | `dialkit motion motion-v` | `dialkit/vue` | `import 'dialkit/styles.css'` |
-   | Vanilla JS / Astro scripts / GSAP sites | `dialkit` | `dialkit/vanilla` | `import 'dialkit/vanilla/styles.css'` |
+   | Solid, Svelte, Vue, vanilla JS, Astro, GSAP sites | `dialkit motion react react-dom` (dev) | the React island below | `import 'dialkit/styles.css'` inside the island |
+
+   Outside React, mount the panel as a small React island (`createElement`, no JSX needed) and read values through the controller; the reference is `design/video/preview/` in Blick (`~/learning-art/learn-about-art`). Never use `dialkit/vanilla`, `dialkit/solid`, `dialkit/svelte` or `dialkit/vue` for the panel: those are the stock panels, and the patch does not reach them. The patch serves `dialkit` unbundled, so a project without the React plugin needs `optimizeDeps.include: ['react', 'react/jsx-runtime', 'react-dom', 'react-dom/client', 'motion/react']` in its Vite config.
 
    The other framework peer deps are optional, so nothing else gets pulled in.
-4. **Mount exactly one root** for the app: `<DialRoot />` next to the app's UI (React/Solid/Svelte/Vue; in Next.js App Router put it in a `'use client'` component in the root layout), or `createDialRoot()` once in vanilla. **Always** wire the ⌘. hide/show shortcut from "Hide the panel with ⌘." below.
+4. **Mount exactly one root** for the app: `<DialRoot />` next to the app's UI (React/Solid/Svelte/Vue; in Next.js App Router put it in a `'use client'` component in the root layout), or the React island from the Blick reference outside React (never `createDialRoot()` from `dialkit/vanilla`). **Always** wire the ⌘. hide/show shortcut from "Hide the panel with ⌘." below.
 5. **Keep it out of production.** Framework roots hide in production unless `productionEnabled` is set. **Vanilla roots show in production by default**, so load the vanilla panel dev-only behind a dynamic import, which also keeps it out of the bundle:
    ```js
    if (import.meta.env.DEV) import('./dials.js').then(({ attachDials }) => attachDials({ /* app hooks */ }));
@@ -115,9 +114,9 @@ When you test by dragging/clicking in the page yourself, your test edits auto-sa
 
 Reference: the Blink flywheel prototype (`blink-flywheel`, Oct 2026).
 
-## the user's panel patch (always, React + Vite)
+## The patched panel (always, every project)
 
-the user wants his own panel layout in every project. `extras/dialkit-patch/` (next to this file) changes the stock panel without touching `node_modules`:
+This is the only panel the user uses; a stock DialKit panel, in any framework, counts as outdated. `extras/dialkit-patch/` (next to this file) changes the stock panel without touching `node_modules`:
 
 - **One toolbar under the DialKit title**, right-aligned: copy (all sections at once) | undo, redo (also ⌘Z, ⇧⌘Z / ⌘Y; one slider drag is one step), version history | sections menu (jumps to a section, ticks the one you're in). Sections lose their own Copy parameters / Save version row and the divider under it. Action buttons get white text. The open panel can be dragged by its title row (stock DialKit only drags it while collapsed). Easing durations go up to 10 s (stock: 2 s).
 - **Version history** (clock button): a dropdown of saved versions grouped by day, each listing its changes ("Motion · Open · Duration 1 → 1.05") and who made it (You, Reload, Claude, Restored). Opening one previews its values read-only (live in the app) with Restore and Done. Versions are saved 30 s after the last panel change, on reload with unsaved changes, on load when the values changed in code, and on restore. Stored in `dial-history.json` (30 days) through a dev-only endpoint.
@@ -125,7 +124,7 @@ the user wants his own panel layout in every project. `extras/dialkit-patch/` (n
 Setup: copy the folder into the project root as `dialkit-patch/`, add `dialkitPatch()` (from `./dialkit-patch/plugin.js`) to the Vite `plugins`, and add `dial-history.json` and `dial-history.json.tmp` to `.gitignore`. It's dev-only (`apply: 'serve'`); production builds use the stock package (or the project's defaults-only stub).
 
 - The patch edits DialKit's compiled React bundle with exact string replacements written against **dialkit 2.1.0**. Each must match once, so after a DialKit update the dev server fails loudly instead of dropping the patch: update the replacements in `plugin.js` (or pin 2.1.0).
-- React only (the vanilla/Solid/Svelte/Vue bundles aren't patched). Non-Vite stacks (Next.js) would need the same replacements applied another way.
+- The patch rewrites the React bundle only, which is why every stack mounts the React island. Non-Vite stacks (Next.js) need the same replacements applied another way (a loader); say so and ask before building.
 - When you change `toolbar.js` or `toolbar.css`, the module URL changes (a hash), so a normal reload picks it up.
 - Testing it yourself saves versions and values: back up `dial-values.json` and `dial-history.json` first and put them back after.
 - Reference: Blick (`learn-about-art`, Oct 2026), where it was built.

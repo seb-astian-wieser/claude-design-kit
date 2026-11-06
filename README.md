@@ -43,7 +43,7 @@ If you build prototypes, add this too:
 | `handoff` | "new section", "let's move on to X", a milestone landing | Appends a dated entry to the CLAUDE.md log and proposes a fresh session for the next piece, then stops |
 | `project-status` | "status", "where are we", "what should I close" | One table of what is in flight from CLAUDE.md, the sidebar group and `gh pr list`; offers to archive finished sessions and fix the In-flight section |
 | `prototype` | "prototype", "demo page", "build the animation", turning frames into something that runs | DialKit first with the patched panel, copy-for-copy from the frames, Vite + React in a section subfolder, then build and verify |
-| `dialkit` | "add DialKit", "set up dials", any live control panel | Installs [DialKit](https://github.com/joshpuckett/dialkit) and applies the patched panel below |
+| `dialkit` | "add DialKit", "set up dials", any live control panel | Installs Sebastian's DialKit: [dialkit](https://github.com/joshpuckett/dialkit) pinned to 2.1.0 with the patched panel below, in every framework; stock and vanilla panels are never used |
 | `grill` | "grill me", "interview me about this plan" | A one-question-at-a-time interview that pins down every real decision in a plan before anything is built |
 | `react-run` | "add run", "set up the run utility" | The tiny `run()` utility for inline logic in JSX instead of nested ternaries, with Biome lint rules |
 
