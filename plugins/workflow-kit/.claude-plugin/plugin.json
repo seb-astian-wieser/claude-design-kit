@@ -1,0 +1,21 @@
+{
+  "name": "workflow-kit",
+  "version": "0.2.0",
+  "description": "Claude Code workflow kit: one folder and a short CLAUDE.md per project, one session per section with handoffs, a status round, plan grilling, and prototypes with a patched DialKit panel.",
+  "author": {
+    "name": "Sebastian Wieser"
+  },
+  "repository": "https://github.com/seb-astian-wieser/claude-workflow-kit",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "tokens",
+    "context",
+    "claude-md",
+    "sessions",
+    "prototype",
+    "dialkit",
+    "design",
+    "skills"
+  ]
+}

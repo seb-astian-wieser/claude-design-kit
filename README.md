@@ -1,4 +1,4 @@
-# claude-design-kit
+# claude-workflow-kit
 
 Claude Code skills for design work that keep token use down. Built from three days of one designer's usage logs, where 84% of the cost was Claude reading context and more than half of the total was re-reading it: connector tool lists, long sessions, screenshots.
 
@@ -9,11 +9,11 @@ The guide that goes with it, for you and for your Claude: [GUIDE.md](GUIDE.md) (
 Inside Claude Code:
 
 ```
-/plugin marketplace add seb-astian-wieser/claude-design-kit
-/plugin install design-kit@seb-design-kit
+/plugin marketplace add seb-astian-wieser/claude-workflow-kit
+/plugin install workflow-kit@seb-workflow-kit
 ```
 
-Updates arrive with `/plugin marketplace update seb-design-kit`.
+Updates arrive with `/plugin marketplace update seb-workflow-kit`.
 
 Then add this block to the end of your `~/.claude/CLAUDE.md`. It is what makes the skills fire without being asked, and it costs about 60 tokens a turn:
 
@@ -49,7 +49,7 @@ If you build prototypes, add this too:
 
 ## The DialKit patch
 
-`plugins/design-kit/skills/dialkit/extras/dialkit-patch/` is a dev-only Vite plugin that changes DialKit's panel without touching `node_modules`:
+`plugins/workflow-kit/skills/dialkit/extras/dialkit-patch/` is a dev-only Vite plugin that changes DialKit's panel without touching `node_modules`:
 
 - one toolbar for the whole panel: sections menu, undo, redo, copy all parameters
 - sections lose their own copy and save rows

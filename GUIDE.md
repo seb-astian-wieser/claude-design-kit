@@ -48,7 +48,7 @@ Over three heavy days of Claude Code, 84% of the cost was Claude reading context
 
 ### The skills
 
-Seven skills, installed by step 1 of the setup. Each is a folder with one `SKILL.md` and triggers on the phrases in its description; the exact files are in [the repo](https://github.com/seb-astian-wieser/claude-design-kit), and updates arrive with `/plugin marketplace update seb-design-kit`.
+Seven skills, installed by step 1 of the setup. Each is a folder with one `SKILL.md` and triggers on the phrases in its description; the exact files are in [the repo](https://github.com/seb-astian-wieser/claude-workflow-kit), and updates arrive with `/plugin marketplace update seb-workflow-kit`.
 
 | Skill | Triggers on | What it does |
 | --- | --- | --- |
@@ -66,11 +66,11 @@ When the user hands you this doc, do the following in order. Ask before each ste
 1. **Install the kit.** Run these two, or if you cannot run the CLI, tell the user to type them as slash commands inside Claude Code:
 
    ```
-   claude plugin marketplace add seb-astian-wieser/claude-design-kit
-   claude plugin install design-kit@seb-design-kit
+   claude plugin marketplace add seb-astian-wieser/claude-workflow-kit
+   claude plugin install workflow-kit@seb-workflow-kit
    ```
 
-   This adds seven skills: `project-start`, `handoff`, `project-status`, `prototype`, `dialkit` (with a patched panel), `grill`, `react-run`. Source and README: [github.com/seb-astian-wieser/claude-design-kit](https://github.com/seb-astian-wieser/claude-design-kit).
+   This adds seven skills: `project-start`, `handoff`, `project-status`, `prototype`, `dialkit` (with a patched panel), `grill`, `react-run`. Source and README: [github.com/seb-astian-wieser/claude-workflow-kit](https://github.com/seb-astian-wieser/claude-workflow-kit).
 2. **Append this block to `~/.claude/CLAUDE.md`** (create the file if it is missing; leave everything already in it untouched):
 
    ```markdown
