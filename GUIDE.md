@@ -6,7 +6,7 @@ Paste this whole doc into a Claude Code session. Your Claude follows the setup s
 
 ## For you: the 60-second version
 
-- In one heavy week, 85% of what Claude Code cost was reading and 15% writing. More than half of the total was re-reading what it had already seen: the tool lists of your connectors, the whole conversation, every screenshot, on every turn.
+- In three heavy days, 84% of what Claude Code cost was reading and 16% writing. More than half of the total was re-reading what it had already seen: the tool lists of your connectors, the whole conversation, every screenshot, on every turn.
 - One folder per project with a short CLAUDE.md, and one session per section of work, cut that by half or more.
 - Prototypes get a live control panel, so you tune in the browser and paste values once instead of twenty chat rounds.
 - Keep two or three connectors on, not twelve.
@@ -18,31 +18,31 @@ Why the setup above works, and the habits the skills encode. Nothing here is req
 
 ### Why
 
-In one heavy Claude Code week, 85% of the cost was Claude reading context and 15% writing. 57% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
+Over three heavy days of Claude Code (Nov 3 to 5, 2026, $729 at API rates), 84% of the cost was Claude reading context and 16% writing. 56% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
 
-| What | One designer's week, Nov 2026, at API rates |
+| What | One designer, Nov 3 to 5, 2026, at API rates |
 | --- | --- |
-| Baseline per request | 65k to 130k tokens |
-| Context per turn, long sessions | 240k to 680k tokens on average |
-| One turn at 500k context | about 10 cents to read, 1.5 cents to write |
+| Baseline per request | 95k to 135k tokens |
+| Context per turn, long sessions | 415k to 600k tokens on average |
+| One turn at 500k context | about 10 cents to read, under 2 cents to write |
 | Most expensive session | 2,100 messages, 42 hours, $173 |
-| Share of cost that was writing | about 15% |
+| Share of cost that was writing | about 16% |
 
-- **Baseline per request** is the system prompt plus the tool list of every attached connector and plugin, sent before you have typed a word. "No folder" sessions sat at the top of the range, project sessions at the bottom.
-- **Context per turn** is the whole conversation so far: your messages, Claude's replies, tool results, screenshots, all re-read on every turn. Measured across the five biggest sessions; the peaks were near the 1M window.
-- **One turn at 500k** shows the split: cached reads are cheap per token but there are half a million of them, while the reply is a few hundred tokens.
-- **The most expensive session** was a hub kept open for days that forked child sessions, each starting with the hub's whole history; $103 of the $173 was those forks.
-- **15% writing** means the other 85% was reading context: 28% reading new material for the first time (tool results, files, your messages) and 57% re-reading what was already there.
+- **Baseline per request** is the first request of a new session: the system prompt, the tool list of every attached connector and plugin, and your first message. "No folder" sessions started at 110k to 135k, project sessions at 75k to 115k; older sessions with fewer connectors started at 65k.
+- **Context per turn** is the whole conversation so far: your messages, Claude's replies, tool results, screenshots, all re-read on every turn. Measured across the five biggest sessions; every one of them peaked near 965k, just under the 1M window.
+- **One turn at 500k** shows the split: cached reads are cheap per token but there are half a million of them, while the reply averages about 800 tokens.
+- **The most expensive session** was a hub kept open for 42 hours at 460k average context. The subagents it dispatched started fresh, at about 80k each, but there were many of them, and they added $103 of the $173.
+- **16% writing** means the other 84% was reading context: 28% reading new material for the first time (tool results, files, your messages) and 56% re-reading what was already there.
 
 ### The habits
 
-- **One folder per project, one CLAUDE.md under 40 lines**: pointers, decisions, in flight, log. Read every turn, it replaces pasted links and screenshots. A "No folder" session gets private memory and starts 30 to 50k tokens heavier.
+- **One folder per project, one CLAUDE.md under 40 lines**: pointers, decisions, in flight, log. Read every turn, it replaces pasted links and screenshots. A "No folder" session gets private memory and starts about 30k tokens heavier.
 - **One session per section.** Name the thing in the first message; `/handoff` at a topic switch or milestone. By a few hundred messages each turn costs five times what it did at the start.
 - **Two or three connectors on.** Each one ships its tool list every turn; plugins with hundreds of tools go per project.
 - **Tune in the browser, paste values once.** Twenty rounds of "a bit slower" at 500k context is pure re-reading.
 - **Fewer screenshots.** Each one stays in context for the rest of the session; link the frame or the running app.
 - **Narrow reads, short outputs, lower effort for polish**, and `/compact` after a milestone rather than when forced.
-- **No long-lived hub that forks children.** Open sessions yourself with a ten-line brief; git, the sidebar group and an In-flight section in CLAUDE.md are the overview; `/project-status` once a week.
+- **No long-lived hub session.** Open sessions yourself with a ten-line brief, fresh rather than forked; git, the sidebar group and an In-flight section in CLAUDE.md are the overview; `/project-status` once a week.
 - **Model by cache price.** Sonnet reads cache at the same price as Opus; Haiku at a twentieth, so Haiku for renames, tests and scans.
 - Claude cannot see its own context size, so when a session has clearly gone long, type `/handoff` yourself.
 
