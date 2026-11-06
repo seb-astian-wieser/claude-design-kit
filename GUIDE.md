@@ -6,7 +6,7 @@ Paste this whole doc into a Claude Code session. Your Claude follows the setup s
 
 ## For you: the 60-second version
 
-- About 85% of what Claude Code costs is re-reading: the tool lists of your connectors, the whole conversation, every screenshot, on every turn.
+- In one heavy week, 85% of what Claude Code cost was reading and 15% writing. More than half of the total was re-reading what it had already seen: the tool lists of your connectors, the whole conversation, every screenshot, on every turn.
 - One folder per project with a short CLAUDE.md, and one session per section of work, cut that by half or more.
 - Prototypes get a live control panel, so you tune in the browser and paste values once instead of twenty chat rounds.
 - Keep two or three connectors on, not twelve.
@@ -18,7 +18,7 @@ Why the setup above works, and the habits the skills encode. Nothing here is req
 
 ### Why
 
-About 85% of a heavy Claude Code week is Claude re-reading context: every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
+In one heavy Claude Code week, 85% of the cost was Claude reading context and 15% writing. 57% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
 
 | What | One designer's week, Nov 2026, at API rates |
 | --- | --- |
@@ -26,13 +26,13 @@ About 85% of a heavy Claude Code week is Claude re-reading context: every turn s
 | Context per turn, long sessions | 240k to 680k tokens on average |
 | One turn at 500k context | about 10 cents to read, 1.5 cents to write |
 | Most expensive session | 2,100 messages, 42 hours, $173 |
-| Share of cost that was writing | about 12% |
+| Share of cost that was writing | about 15% |
 
 - **Baseline per request** is the system prompt plus the tool list of every attached connector and plugin, sent before you have typed a word. "No folder" sessions sat at the top of the range, project sessions at the bottom.
 - **Context per turn** is the whole conversation so far: your messages, Claude's replies, tool results, screenshots, all re-read on every turn. Measured across the five biggest sessions; the peaks were near the 1M window.
 - **One turn at 500k** shows the split: cached reads are cheap per token but there are half a million of them, while the reply is a few hundred tokens.
 - **The most expensive session** was a hub kept open for days that forked child sessions, each starting with the hub's whole history; $103 of the $173 was those forks.
-- **12% writing** means the other 88% of the week's cost was Claude reading context.
+- **15% writing** means the other 85% was reading context: 28% reading new material for the first time (tool results, files, your messages) and 57% re-reading what was already there.
 
 ### The habits
 
