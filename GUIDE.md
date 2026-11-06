@@ -18,9 +18,9 @@ Why the setup above works, and the habits the skills encode. Nothing here is req
 
 ### Why
 
-Over three heavy days of Claude Code (Nov 3 to 5, 2026, $729 at API rates), 84% of the cost was Claude reading context and 16% writing. 56% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
+Over three heavy days of Claude Code, 84% of the cost was Claude reading context and 16% writing. 56% of the total was re-reading context it had already seen, because every turn sends the system prompt, every connector's tool list and the whole conversation again. Cached reads are cheap per token, but a 500k-token session pays about 10 cents per turn before it writes a word.
 
-| What | One designer, Nov 3 to 5, 2026, at API rates |
+| What | One designer, three days, at API rates |
 | --- | --- |
 | Baseline per request | 95k to 135k tokens |
 | Context per turn, long sessions | 415k to 600k tokens on average |
